@@ -79,7 +79,7 @@ build() {
         -DPLUGIN_IO_QLAS:BOOL=ON
         -DPLUGIN_IO_QPHOTOSCAN:BOOL=ON
         -DPLUGIN_IO_QRDB:BOOL=OFF # requires rdblib (package for AUR from http://www.riegl.com/products/software-packages/rdblib/)
-        -DPLUGIN_IO_QSTEP=ON # requires opencascade
+        -DPLUGIN_IO_QSTEP=OFF # requires opencascade:7.7, need patch for version:7.8
         -DOPENCASCADE_INC_DIR="/usr/include/opencascade"
         -DOPENCASCADE_LIB_DIR="/usr/lib"
         -DPLUGIN_STANDARD_QCANUPO:BOOL=ON 
