@@ -104,8 +104,8 @@ build() {
         -DPLUGIN_STANDARD_QRANSAC_SD:BOOL=ON
         -DPLUGIN_STANDARD_QSRA:BOOL=ON
         -DOPTION_USE_DXF_LIB:BOOL=ON # required by qsra plugin
-        -DPLUGIN_STANDARD_MASONRY_QAUTO_SEG=ON
-        -DPLUGIN_STANDARD_MASONRY_QMANUAL_SEG=ON
+        # -DPLUGIN_STANDARD_MASONRY_QAUTO_SEG=ON
+        # -DPLUGIN_STANDARD_MASONRY_QMANUAL_SEG=ON
         -DPLUGIN_STANDARD_QANIMATION=ON
         -DQANIMATION_WITH_FFMPEG_SUPPORT=ON
         -DPLUGIN_STANDARD_QBROOM=ON
@@ -150,7 +150,7 @@ prepare_submodule() {
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qPoissonRecon/extern/PoissonRecon.url "$srcdir/PoissonRecon"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMPlane.url "$srcdir/mplane-plugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qColorimetricSegmenter.url "$srcdir/ptrans"
-  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMasonry.url "$srcdir/masonry-cc"
+  # git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMasonry.url "$srcdir/masonry-cc"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qJSonRPCPlugin.url "$srcdir/JSonRPCPlugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qCanupo/contrib/dlib.url "$srcdir/dlib"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/cc-treeiso-plugin.url "$srcdir/cc-treeiso-plugin"
@@ -165,7 +165,7 @@ source+=(
   "PoissonRecon::git+https://github.com/cloudcompare/PoissonRecon"
   "mplane-plugin::git+https://github.com/hvs-ait/mplane-plugin"
   "ptrans::git+https://gitlab.univ-nantes.fr/E164955Z/ptrans"
-  "masonry-cc::git+https://github.com/CyberbuildLab/masonry-cc"
+  # "masonry-cc::git+https://github.com/CyberbuildLab/masonry-cc"
   "JSonRPCPlugin::git+https://gitlab.com/theadib/JSonRPCPlugin"
   "dlib::git+https://github.com/davisking/dlib"
   "cc-treeiso-plugin::git+https://github.com/truebelief/cc-treeiso-plugin"
