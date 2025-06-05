@@ -14,14 +14,15 @@ pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
 url="http://www.danielgm.net/cc/"
 license=('GPL2')
-depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'mpir' 'pcl' 'pdal' 'laszip' 'qt5-base' 'qt5-tools' 'qt5-svg' 'qt5-websockets' 'shapelib' 'tbb' 'opencascade' 'opencv' 'gdal')
+# depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'mpir' 'pcl' 'pdal' 'laszip' 'qt5-base' 'qt5-tools' 'qt5-svg' 'qt5-websockets' 'shapelib' 'tbb' 'opencascade' 'opencv' 'gdal')
+depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'pcl' 'pdal' 'laszip' 'qt5-base' 'qt5-tools' 'qt5-svg' 'qt5-websockets' 'shapelib' 'tbb' 'opencascade' 'opencv' 'gdal')
 #fix pcl:>vtk:>vtkm:>openmp missing deps
 depends+=(openmpi)
 depends+=(nlohmann-json fmt jsoncpp)
 depends+=(utf8cpp fast_float)
 makedepends=('clang' 'cmake' 'doxygen' 'git' 'laz-perf' 'libharu' 'ninja' 'proj' 'python')
 source=("${name}::git+https://github.com/CloudCompare/CloudCompare.git${_fragment}"
-        "${name}-cork::git+https://github.com/CloudCompare/cork.git"
+        # "${name}-cork::git+https://github.com/CloudCompare/cork.git"
         CloudCompare.desktop
         ccViewer.desktop
         vtk_jsoncpp.patch)
@@ -83,13 +84,13 @@ build() {
         -DOPENCASCADE_LIB_DIR="/usr/lib"
         -DPLUGIN_STANDARD_QCANUPO:BOOL=ON 
         -DPLUGIN_STANDARD_QCOMPASS:BOOL=ON
-        -DPLUGIN_STANDARD_QCORK:BOOL=ON # require mpir, cork (cork-git is not enough)
-        -DMPIR_INCLUDE_DIR:PATH=/usr/include # required by qcork plugin
-        -DCORK_INCLUDE_DIR:PATH="${srcdir}/${name}-cork/src" # required by qcork plugin
+        # -DPLUGIN_STANDARD_QCORK:BOOL=ON # require mpir, cork (cork-git is not enough)
+        # -DMPIR_INCLUDE_DIR:PATH=/usr/include # required by qcork plugin
+        # -DCORK_INCLUDE_DIR:PATH="${srcdir}/${name}-cork/src" # required by qcork plugin
         -DFFMPEG_INCLUDE_DIR:PATH=/usr/include/ffmpeg4.4 # required by qAnimation plugin
         -DFFMPEG_LIBRARY_DIR:PATH=/usr/lib/ffmpeg4.4 # required by qAnimation plugin
-        -DCORK_RELEASE_LIBRARY_FILE:FILEPATH="${srcdir}/${name}-cork/lib/libcork.a" # required by qcork plugin
-        -DMPIR_RELEASE_LIBRARY_FILE:FILEPATH=/usr/lib/libmpir.so # require by qcork plugin
+        # -DCORK_RELEASE_LIBRARY_FILE:FILEPATH="${srcdir}/${name}-cork/lib/libcork.a" # required by qcork plugin
+        # -DMPIR_RELEASE_LIBRARY_FILE:FILEPATH=/usr/lib/libmpir.so # require by qcork plugin
         -DPLUGIN_STANDARD_QCSF:BOOL=ON
         -DPLUGIN_STANDARD_QFACETS:BOOL=ON # requires shapelib
         -DOPTION_USE_SHAPE_LIB:BOOL=ON
@@ -116,8 +117,8 @@ build() {
         -DJsonCpp_INCLUDE_DIR=/usr/include
         -DJsonCpp_LIBRARY=/usr/lib
   )
-  msg2 "Build Cork lib"
-  make -C "${srcdir}/${name}-cork" CXXFLAGS="$CXXFLAGS -DSUPPORT_TOPO_STREAM_OPERATORS -fPIC"
+  # msg2 "Build Cork lib"
+  # make -C "${srcdir}/${name}-cork" CXXFLAGS="$CXXFLAGS -DSUPPORT_TOPO_STREAM_OPERATORS -fPIC" CXX="g++"
   msg2 "Build CloudCompare"
   cmake -B build -S "${srcdir}/${name}" -G Ninja "${CMAKE_FLAGS[@]}"
 # shellcheck disable=SC2086 # allow slitting for MAKEFLAGS carrying multiple flags.
